@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 export async function POST(request: NextRequest) {
   const baseUrl = process.env.BASE_URL + "/auth/login";
-
+console.log("baseUrl",baseUrl)
   const { username, password } = await request.json();
 
   try {
