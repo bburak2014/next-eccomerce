@@ -29,8 +29,7 @@ export async function middleware(req: NextRequest) {
       // Başarılı bir yanıt alındığında
       if (refreshResponse.ok) {
         const data = await refreshResponse.json();
-		console.log( data)
-
+ 
         const response = NextResponse.next();
 
         // Yeni accessToken'ı çereze kaydet
