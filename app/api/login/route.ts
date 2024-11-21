@@ -4,7 +4,6 @@ import { cookies } from "next/headers";
 
 export async function POST(request: NextRequest) {
   const baseUrl = process.env.BASE_URL + "/auth/login";
-console.log("baseUrl",baseUrl)
   const { username, password } = await request.json();
 
   try {
@@ -29,7 +28,7 @@ console.log("baseUrl",baseUrl)
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
-        maxAge: 60 * 60 * 24, // 1 gün
+        maxAge: 60 * 60, // 1 saat
         path: "/",
       });
 

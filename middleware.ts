@@ -31,7 +31,7 @@ export async function middleware(req: NextRequest) {
         const data = await refreshResponse.json();
  
         const response = NextResponse.next();
-
+ 
         // Yeni accessToken'ı çereze kaydet
         response.cookies.set("token", data.accessToken, {
           httpOnly: true,
