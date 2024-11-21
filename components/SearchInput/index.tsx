@@ -1,13 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface SearchInputProps {
   initialSearchQuery: string;
+  category: string;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ initialSearchQuery }) => {
+const SearchInput: React.FC<SearchInputProps> = ({ initialSearchQuery, category }) => {
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
   const router = useRouter();
 
@@ -16,10 +17,15 @@ const SearchInput: React.FC<SearchInputProps> = ({ initialSearchQuery }) => {
     if (searchQuery.trim()) {
       router.push(`/products?search=${searchQuery}`);
     } else {
-      router.push(`/products`);
+      router.push(`/products${category ? `?category=${category}` : ""}`);
     }
   };
 
+  useEffect(() => {
+	if (!initialSearchQuery) {
+		setSearchQuery("");
+	}
+}, [initialSearchQuery]);
   return (
     <form onSubmit={handleSearch} className="mb-4">
       <input
