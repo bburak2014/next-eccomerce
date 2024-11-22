@@ -1,3 +1,5 @@
+//utils/api 
+
 export interface Product {
 	id: number;
 	title: string;
@@ -38,3 +40,5 @@ export interface Product {
 	  throw new Error("Ürünler yüklenemedi. Lütfen tekrar deneyin.");
 	}
   }
+
+ 

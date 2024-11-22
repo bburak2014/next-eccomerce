@@ -1,3 +1,4 @@
+// Category Select Component
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -8,9 +9,8 @@ interface CategorySelectProps {
 }
 
 const CategorySelect: React.FC<CategorySelectProps> = ({ initialCategory }) => {
-	const [category, setCategory] = useState(initialCategory);
+	const [category, setCategory] = useState("");
 	const router = useRouter();
-
 	const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const newCategory = e.target.value;
 		setCategory(newCategory);
