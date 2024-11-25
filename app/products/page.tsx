@@ -1,3 +1,4 @@
+// product list
 import SearchInput from "@/components/SearchInput";
 import CategorySelect from "@/components/CategorySelect";
 import { Metadata } from "next";
