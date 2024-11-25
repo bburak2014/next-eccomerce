@@ -78,7 +78,7 @@ export default function LoginPage() {
 				</div>
 			</div>
 			<div className="flex w-full h-full  lg:w-[42%] p-10 justify-center  ">
-				<div className="w-full gap-8 flex flex-col max-w-form relative top-[23vh]">
+				<div className="w-full gap-8 flex flex-col max-w-form relative top-[23vh] h-min">
 					<div className='flex flex-col items-center px-4 gap-4'>
 						<p className="font-bold text-2rem leading-primary text-primary text-center">Welcome Octopus!
 						</p>
@@ -125,7 +125,7 @@ export default function LoginPage() {
 						{error && <p className="text-red-500">{error}</p>}
 						<button
 							onClick={handleLogin}
-							className="w-full p-2 bg-green text-sm text-white rounded-lg font-medium text-center"
+							className="w-full p-3 bg-green text-sm text-white rounded-lg font-medium text-center"
 							disabled={loading}
 						>
 							{loading ? 'Loading...' : 'Login'}
