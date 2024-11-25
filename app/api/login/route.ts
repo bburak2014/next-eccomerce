@@ -1,6 +1,5 @@
 //login route
 import { NextRequest, NextResponse } from "next/server";
-import axios from "axios";
 import { cookies } from "next/headers";
 
 export async function POST(request: NextRequest) {
@@ -8,10 +7,16 @@ export async function POST(request: NextRequest) {
   const { username, password } = await request.json();
 
   try {
-    const response = await axios.post(baseUrl, { username, password });
+    const response = await fetch(baseUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
 
-    if (response.status === 200) {
-      const { accessToken, refreshToken } = response.data;
+    if (response.ok) {
+      const { accessToken, refreshToken } = await response.json();
 
       const cookieStore = await cookies();
 
@@ -35,20 +40,14 @@ export async function POST(request: NextRequest) {
 
       return NextResponse.json({ success: true });
     } else {
-      return NextResponse.json({ error: "Login failed" }, { status: 401 });
+      const errorData = await response.json();
+      return NextResponse.json({ error: errorData.message || "Login failed" }, { status: 401 });
     }
   } catch (error: unknown) {
-    const errorMessage =
-      axios.isAxiosError(error) && error.response
-        ? error.response.data?.message || "An error occurred"
-        : "An error occurred";
-
-    const statusCode =
-      axios.isAxiosError(error) && error.response ? error.response.status : 500;
     return NextResponse.json(
-      { error: errorMessage },
+      { error: "An error occurred" },
       {
-        status: statusCode,
+        status: 500,
       }
     );
   }

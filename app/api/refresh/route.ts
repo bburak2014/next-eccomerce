@@ -1,6 +1,5 @@
 //refresh route
 import { NextResponse } from "next/server";
-import axios from "axios";
 import { cookies } from "next/headers";
 
 export async function POST() {
@@ -11,12 +10,16 @@ export async function POST() {
   }
 
   try {
-    const response = await axios.post(process.env.BASE_URL + "/auth/refresh", {
-      refreshToken,
+    const response = await fetch(process.env.BASE_URL + "/auth/refresh", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ refreshToken }),
     });
 
-    if (response.status === 200) {
-      const { accessToken } = response.data;
+    if (response.ok) {
+      const { accessToken } = await response.json();
 
       // Yeni accessToken'i güncelle
       (await cookies()).set("token", accessToken, {
@@ -29,17 +32,15 @@ export async function POST() {
 
       return NextResponse.json({ success: true });
     } else {
-      return NextResponse.json({ error: "Refresh failed" }, { status: 401 });
+      const errorData = await response.json();
+      return NextResponse.json({ error: errorData.message || "Refresh failed" }, { status: 401 });
     }
   } catch (error: unknown) {
-    const errorMessage =
-      axios.isAxiosError(error) && error.response
-        ? error.response.data?.message || "An error occurred"
-        : "An error occurred";
-
-    const statusCode = axios.isAxiosError(error) && error.response ? error.response.status : 500;
-    return NextResponse.json({ error: errorMessage }, {
-      status: statusCode,
-    });
+    return NextResponse.json(
+      { error: "An error occurred" },
+      {
+        status: 500,
+      }
+    );
   }
 }

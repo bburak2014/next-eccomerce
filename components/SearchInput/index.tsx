@@ -1,3 +1,4 @@
+// serach input component
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -29,7 +30,6 @@ const SearchInput: React.FC<SearchInputProps> = ({ initialSearchQuery }) => {
 			if (searchQuery?.length >= 3 && searchQuery.trim()) {
 				router.push(`/products?search=${searchQuery}`);
 			}
-			else router.push(`/products`);
 		}, 500),
 		[searchQuery]
 	);
