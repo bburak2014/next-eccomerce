@@ -16,7 +16,8 @@ export default {
         tertiary: "#94A3B8",
         inputBg: "#F1F5F9", // Arka plan için
         green: "#00B500", // Focus border için
-		black:"#000000",
+        black: "#000000",
+        gray: "#626262"
       },
       fontSize: {
         "2rem": "2rem",
@@ -31,6 +32,9 @@ export default {
       },
       maxWidth: {
         form: "27.063rem",
+      },
+      fontFamily: {
+        inter: ["inter", "sans-serif"],
       },
     },
     variants: {

@@ -42,7 +42,7 @@ const CategorySelect: React.FC<CategorySelectProps> = ({ initialCategory, catego
 
 	return (
 		<>
-			<h3 className="font-bold text-lg text-black mt-2 mb-2 leading-[27px] tracking-[0.01em]">
+			<h3 className="font-bold text-lg text-black mt-4 mb-4 leading-[27px] tracking-1">
 				Kategoriler
 				<div className="w-full h-[5px] bg-black mt-1"></div>
 			</h3>
@@ -79,7 +79,7 @@ const CategorySelect: React.FC<CategorySelectProps> = ({ initialCategory, catego
 					</div>
 				))}
 			</div>
-			<button className="bg-primary text-white p-2 rounded-lg mt-4 w-full" onClick={handleClick}>Filtrele</button>
+			<button className="bg-primary text-white p-[10px] rounded-lg mt-4 w-full" onClick={handleClick}>Filtrele</button>
 		</>
 	);
 };

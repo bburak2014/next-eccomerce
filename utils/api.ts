@@ -1,13 +1,5 @@
 //utils/api 
-
-export interface Product {
-	id: number;
-	title: string;
-	description: string;
-	price: number;
-	thumbnail: string;
-	images: string[];
-}
+import { Product } from "@/utils/type";
 
 export interface ProductResponse {
 	products: Product[];
@@ -64,4 +56,3 @@ export async function fetchCategory() {
 	if (!res.ok) return [];
 	return res.json();
 }
- 
