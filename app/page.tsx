@@ -54,18 +54,20 @@ export default function LoginPage() {
 			} else {
 				const data = await res.json();
 				setError(data.message || 'Login failed');
+				setLoading(false);
+
 			}
 		} catch {
 			setError('An error occurred');
-		} finally {
 			setLoading(false);
-		}
+
+		} 
 	}, [credentials, validateInputs, router]);
 
 
 	return (
 		<div className="flex items-center justify-center h-screen">
-			<div className="hidden lg:flex w-full h-full lg:w-[58%] border-r flex-col p-10   gap-27">
+			<div className="hidden lg:flex w-full h-full lg:w-[58%] flex-col p-10 gap-27 bg-background">
 				<Image className='' src="/images/logo.png" alt="Logo" width={234} height={46} />
 				<div className='flex items-center flex-col gap-16'>
 					<Image src="/images/Frame.png" alt="Logo" width={411} height={411} />
@@ -77,7 +79,7 @@ export default function LoginPage() {
 					</div>
 				</div>
 			</div>
-			<div className="flex w-full h-full  lg:w-[42%] p-10 justify-center  ">
+			<div className="flex w-full h-full  lg:w-[42%] p-10 justify-center bg-foreground">
 				<div className="w-full gap-8 flex flex-col max-w-form relative top-[23vh] h-min">
 					<div className='flex flex-col items-center px-4 gap-4'>
 						<p className="font-bold text-2rem leading-primary text-primary text-center">Welcome Octopus!

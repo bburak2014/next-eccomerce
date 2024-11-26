@@ -5,6 +5,8 @@ export interface Product {
 	title: string;
 	description: string;
 	price: number;
+	thumbnail: string;
+	images: string[];
 }
 
 export interface ProductResponse {
@@ -55,3 +57,11 @@ export async function fetchComments(id: string) {
 	if (!res.ok) return [];
 	return res.json();
 }
+
+// Kategorileri çekmek için fonksiyon
+export async function fetchCategory() {
+	const res = await fetch(`https://dummyjson.com/products/category-list`);
+	if (!res.ok) return [];
+	return res.json();
+}
+ 
