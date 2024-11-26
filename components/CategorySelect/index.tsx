@@ -1,37 +1,86 @@
-// Category Select Component
 "use client";
 
+import { replaceHyphensWithSpaces } from "@/utils/helper";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface CategorySelectProps {
 	initialCategory: string;
+	categories: string[];
 }
 
-const CategorySelect: React.FC<CategorySelectProps> = ({ initialCategory }) => {
-	const [category, setCategory] = useState("");
+const CategorySelect: React.FC<CategorySelectProps> = ({ initialCategory, categories }) => {
+	const [category, setCategory] = useState(initialCategory);
 	const router = useRouter();
-	const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const newCategory = e.target.value;
-		setCategory(newCategory);
-		if (newCategory === "") { router.push(`/products`) }
-		else router.push(`/products?category=${newCategory}`);
-	};
 
+	// Kategori değiştiğinde çağrılır
+	const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newCategory = e.target.value;
+
+		// Eğer aynı kategori seçiliyse, seçimi sıfırla
+		if (category === newCategory) {
+			setCategory("");  // Kategoriyi sıfırla
+		} else {
+			setCategory(newCategory);  // Yeni kategori seçildi
+		}
+	};
+	console.log(category)
+	const handleClick = () => {
+		if (category) 
+			{
+				router.push(`/products?category=${category}`);  // Seçilen kategori ile yönlendir
+			}
+	  else {
+			router.push(`/products`);  // Kategori seçili değilse ürün sayfasını göster
+		}
+	}
 	useEffect(() => {
 		if (!initialCategory) {
 			setCategory("");
 		}
 	}, [initialCategory]);
-	
+
 	return (
-		<select value={category} onChange={handleCategoryChange} className="p-2 border rounded w-full mb-4">
-			<option value="">Kategori Seç</option>
-			<option value="smartphones">Akıllı Telefonlar</option>
-			<option value="laptops">Dizüstü Bilgisayarlar</option>
-			<option value="fragrances">Parfümler</option>
-			{/* Diğer kategoriler */}
-		</select>
+		<>
+			<h3 className="font-bold text-lg text-black mt-2 mb-2 leading-[27px] tracking-[0.01em]">
+				Kategoriler
+				<div className="w-full h-[5px] bg-black mt-1"></div>
+			</h3>
+
+			<div className="flex items-start flex-col gap-4 max-h-[21vh] overflow-y-auto">
+				{categories?.map((item) => (
+					<div key={item} className="flex gap-[10px] items-center">
+						{/* Checkbox kullanıyoruz */}
+						<input
+							type="checkbox"
+							id={item}
+							name="category"
+							value={item}
+							onChange={handleCategoryChange}
+							checked={category === item}  // Seçili kategori kontrolü
+							className="hidden peer" // Görünümünü gizle, ancak işlevi koru
+						/>
+						{/* Bu label, checkbox'ı temsil eder */}
+						<label
+							htmlFor={item}
+							className="w-5 h-5 border-2 border-gray-500 flex items-center justify-center cursor-pointer peer-checked:bg-green peer-checked:border-transparent"
+						>
+							{/* Seçildiğinde tick işareti eklemek için */}
+							<span
+								className={`w-[17px] h-[17px] flex items-center justify-center text-white transition-all duration-300 ${category === item ? "opacity-1" : "opacity-0"
+									} peer-checked:opacity-100 peer-checked:scale-100`}
+							>
+								✔
+							</span>
+						</label>
+						<label htmlFor={item} className="first-letter:uppercase">
+							{replaceHyphensWithSpaces(item)}
+						</label>
+					</div>
+				))}
+			</div>
+			<button className="bg-primary text-white p-2 rounded-lg mt-4 w-full" onClick={handleClick}>Filtrele</button>
+		</>
 	);
 };
 

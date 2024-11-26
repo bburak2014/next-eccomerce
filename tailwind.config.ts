@@ -9,13 +9,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "#F8FAFC",
+        foreground: "#FFFFFF",
         primary: "#1E293B",
         secondary: "#64748B",
         tertiary: "#94A3B8",
         inputBg: "#F1F5F9", // Arka plan için
         green: "#00B500", // Focus border için
+		black:"#000000",
       },
       fontSize: {
         "2rem": "2rem",
