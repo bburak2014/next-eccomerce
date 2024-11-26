@@ -65,7 +65,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 						key={product.id}
 						className="p-4 border rounded shadow-sm"
 					>
-						<Image src={product.thumbnail} alt={product.title} width={300} height={200} priority />
+						<Image src={product.thumbnail} alt={product.title} width={300} height={200}  priority />
 						<h2 className="font-semibold">{product.title}</h2>
 						<p className="text-sm text-gray-600 truncate">{product.description}</p>
 						<p className="text-lg font-bold">${product.price}</p>
