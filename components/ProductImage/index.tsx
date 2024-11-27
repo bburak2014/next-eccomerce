@@ -6,17 +6,21 @@ import Image from "next/image";
 interface ProductImageProps {
   src: string;
   alt: string;
+  quality?: number;
+  width?: number | `${number}` | undefined;
+  height?: number;
+  fill?: boolean;
 }
 
-const ProductImage = ({ src, alt }: ProductImageProps) => {
+const ProductImage = ({ src, alt, quality = 75, width = 100, height=100, fill = false }: ProductImageProps) => {
   const [isLoading, setIsLoading] = useState(true);
-
+console.log(src)
   return (
     <div
       style={{
         position: "relative",
-        width: "100%", // Ebeveynin genişliğini kaplar
-        paddingBottom: "100%", // 1:1 en-boy oranı için
+        width: fill ? "100%" : width, // Ebeveynin genişliğini kaplar
+        paddingBottom: fill ? "100%" : undefined, // 1:1 en-boy oranı için
         overflow: "hidden",
         borderRadius: "8px", // İsteğe bağlı yuvarlatma
       }}
@@ -41,13 +45,16 @@ const ProductImage = ({ src, alt }: ProductImageProps) => {
       <Image
         src={src}
         alt={alt}
-        fill // fill özelliği eklendi
+        fill={fill}
+        width={fill ? undefined : width}
+        height={fill ? undefined : height}
         onLoadingComplete={() => setIsLoading(false)}
         style={{
           objectFit: "cover", // Görüntüyü kırpmadan doldur
           opacity: isLoading ? 0 : 1,
           transition: "opacity 0.3s ease-in-out",
         }}
+        quality={quality}
       />
     </div>
   );

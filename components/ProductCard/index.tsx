@@ -39,6 +39,7 @@ const Index = (props: Props) => {
             <ProductImage
               src={product.thumbnail}
               alt={product.title}
+              fill={true}
             />
             <div className='flex flex-col gap-1'>
               <h2 className="font-normal text-black text-base leading-6 tracking-1">{product.title}</h2>

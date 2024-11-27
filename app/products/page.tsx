@@ -62,8 +62,10 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   return (
     <div className={`grid grid-cols-10 gap-8 px-5 py-2 lg:px-20 md:py-8 bg-background h-full ${poppins.className}`}>
       <div className="col-span-10 md:col-span-4 lg:col-span-3 xl:col-span-2 w-full">
+        <div className='sticky top-[126px]'>
         <SearchInput initialSearchQuery={searchQuery} />
         <CategorySelect initialCategory={categoryQuery} categories={categories} />
+        </div>
       </div>
 
       <div className="col-span-10 md:col-span-6 lg:col-span-7 xl:col-span-8  gap-7">
