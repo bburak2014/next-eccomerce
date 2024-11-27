@@ -1,5 +1,4 @@
-
-"use client"
+"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -7,16 +6,21 @@ import Image from "next/image";
 interface ProductImageProps {
   src: string;
   alt: string;
-  width: number;
-  height: number;
-  priority?: boolean;
 }
 
-const ProductImage = ({ src, alt, width, height, priority }: ProductImageProps) => {
+const ProductImage = ({ src, alt }: ProductImageProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div style={{ position: "relative", width, height }}>
+    <div
+      style={{
+        position: "relative",
+        width: "100%", // Ebeveynin genişliğini kaplar
+        paddingBottom: "100%", // 1:1 en-boy oranı için
+        overflow: "hidden",
+        borderRadius: "8px", // İsteğe bağlı yuvarlatma
+      }}
+    >
       {/* Skeleton */}
       {isLoading && (
         <div
@@ -28,7 +32,7 @@ const ProductImage = ({ src, alt, width, height, priority }: ProductImageProps) 
             height: "100%",
             background: "linear-gradient(90deg, #f3f3f3, #ecebeb, #f3f3f3)",
             animation: "skeleton-loading 1.5s infinite",
-            borderRadius: "8px", // İsteğe bağlı köşe yuvarlama
+            borderRadius: "8px",
           }}
         ></div>
       )}
@@ -37,11 +41,13 @@ const ProductImage = ({ src, alt, width, height, priority }: ProductImageProps) 
       <Image
         src={src}
         alt={alt}
-        width={width}
-        height={height}
-        priority={priority}
+        fill // fill özelliği eklendi
         onLoadingComplete={() => setIsLoading(false)}
-        style={{ opacity: isLoading ? 0 : 1, transition: "opacity 0.3s ease-in-out" }}
+        style={{
+          objectFit: "cover", // Görüntüyü kırpmadan doldur
+          opacity: isLoading ? 0 : 1,
+          transition: "opacity 0.3s ease-in-out",
+        }}
       />
     </div>
   );

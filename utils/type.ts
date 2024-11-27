@@ -4,4 +4,13 @@ export interface Product {
     title: string;
     category: string;
     price: number;
+	rating: number;
+}
+
+
+export interface ProductResponse {
+	products: Product[];
+	total: number;
+	skip: number;
+	limit: number;
 }

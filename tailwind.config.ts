@@ -17,7 +17,8 @@ export default {
         inputBg: "#F1F5F9", // Arka plan için
         green: "#00B500", // Focus border için
         black: "#000000",
-        gray: "#626262"
+        gray: "#626262",
+		customBorder:"#E2E8F0"
       },
       fontSize: {
         "2rem": "2rem",
@@ -36,6 +37,9 @@ export default {
       fontFamily: {
         inter: ["inter", "sans-serif"],
       },
+	  borderWidth: {
+		"1": "1px"
+	  }
     },
     variants: {
       extend: {

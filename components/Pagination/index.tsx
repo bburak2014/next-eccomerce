@@ -1,76 +1,93 @@
-//pagination
-"use client";
-
-import { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 interface PaginationProps {
-  totalPages: number;
+	currentPage: number;
+	totalPages: number;
+	searchQuery?: string;
+	categoryQuery?: string;
 }
 
-const Pagination = ({ totalPages }: PaginationProps) => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [currentPage, setCurrentPage] = useState(() => {
-    // URL parametrelerinden 'page' değerini almak
-    const pageParam = searchParams.get('page');
-    return pageParam ? parseInt(pageParam) : 1; // Varsayılan olarak 1. sayfayı al
-  });
- 
-  const [error, setError] = useState<string | null>(null); // Hata mesajı durumu
+const Pagination = ({ currentPage, totalPages, searchQuery, categoryQuery }: PaginationProps) => {
+	// Sayfa numaralarını göstermek için aralık ayarları
+	const maxPageNumbersToShow = 3;
+	const halfRange = Math.floor(maxPageNumbersToShow / 2);
 
-  useEffect(() => {
-    const pageParam = searchParams.get('page');
-    if (pageParam) {
-      const page = Number(pageParam);
-      if (page < 1 || page > totalPages) {
-        setError(`Geçersiz sayfa numarası. Lütfen 1 ile ${totalPages} arasında bir sayfa girin.`);
-        setCurrentPage(1); // Hatalı sayfa girişi durumunda, 1. sayfaya dön
-      } else {
-        setError(null); // Sayfa geçerli ise hatayı sıfırla
-        setCurrentPage(page);
-      }
-    }
-  }, [searchParams, totalPages]); // Sayfa parametreleri değiştiğinde kontrol et
+	let startPage = Math.max(currentPage - halfRange, 1);
+	let endPage = Math.min(currentPage + halfRange, totalPages);
 
-  const handlePageChange = (page: number) => {
-    if (page < 1 || page > totalPages) return; // Geçersiz sayfa numarasını engelle
-    setCurrentPage(page);
+	// Sayfa numaralarını 1'e ve totalPages'e yakınlaştırma
+	if (currentPage <= halfRange) {
+		startPage = 1;
+		endPage = Math.min(maxPageNumbersToShow, totalPages);
+	} else if (totalPages - currentPage < halfRange) {
+		startPage = Math.max(totalPages - maxPageNumbersToShow + 1, 1);
+		endPage = totalPages;
+	}
 
-    const limit = 9; // Sayfa başına gösterilecek ürün sayısı
-    const skip = (page - 1) * limit; // Sayfa numarasına göre 'skip' değeri hesapla
+	const generateLink = (page: number) => (
+		<Link
+			key={page}
+			href={`/products?page=${page}${searchQuery ? `&search=${encodeURIComponent(searchQuery)}` : ""}${categoryQuery ? `&category=${encodeURIComponent(categoryQuery)}` : ""}`}
+			className={`h-8 w-8 flex justify-center items-center border-1 rounded-lg  ${page === currentPage ? "bg-green text-white border-green" : "bg-white text-primary border-customBorder "}`}
+			aria-label={`Sayfa ${page}`}
+		>
+			{page}
+		</Link>
+	);
 
-    // URL'yi yeni sayfa numarası, limit ve skip ile güncelle
-    router.replace(`?page=${page}&limit=${limit}&skip=${skip}`); // Yönlendirme yerine güncelleme yap
-  };
+	return (
+		<div className="mt-8 flex justify-center items-center space-x-2  font-bold font-inter">
 
-  return (
-    <div>
-      {error && <div style={{ color: 'red' }}>{error}</div>} {/* Hata mesajını göster */}
+			<Link
+				href={`/products?page=${currentPage - 1}${searchQuery ? `&search=${encodeURIComponent(searchQuery)}` : ""}${categoryQuery ? `&category=${encodeURIComponent(categoryQuery)}` : ""}`}
+				className={` ${currentPage > 1 ? "pointer-events-auto text-primary" : "pointer-events-none text-tertiary"}`}
+				aria-label={`Sayfa ${currentPage - 1}`}
 
-      <button
-        onClick={() => handlePageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-      >
-        Önceki
-      </button>
-      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-        <button
-          key={page}
-          onClick={() => handlePageChange(page)}
-          className={page === currentPage ? 'active' : ''}
-        >
-          {page}
-        </button>
-      ))}
-      <button
-        onClick={() => handlePageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-      >
-        Sonraki
-      </button>
-    </div>
-  );
+			>
+				Prev
+			</Link>
+
+			{/* Sayfa numaraları */}
+			{startPage > 1 && (
+				<>
+					<Link
+						href={`/products?page=1${searchQuery ? `&search=${encodeURIComponent(searchQuery)}` : ""}${categoryQuery ? `&category=${encodeURIComponent(categoryQuery)}` : ""}`}
+						className="h-8 w-8 flex justify-center items-center border-2 border-customBorder rounded bg-white text-primary "
+						aria-label="Sayfa 1"
+					>
+						1
+					</Link>
+
+				</>
+			)}
+
+			{Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map(generateLink)}
+			{endPage < totalPages && (
+				<>
+					{endPage < totalPages - 1 && (
+						<span className="p-2">...</span>
+					)}
+					<Link
+						href={`/products?page=${totalPages}${searchQuery ? `&search=${encodeURIComponent(searchQuery)}` : ""}${categoryQuery ? `&category=${encodeURIComponent(categoryQuery)}` : ""}`}
+						className="h-8 w-8 flex justify-center items-center border-1 border-customBorder rounded-lg bg-white text-primary "
+						aria-label={`Sayfa ${totalPages}`}
+					>
+						{totalPages}
+					</Link>
+				</>
+			)}
+
+			{/* Sonraki sayfa bağlantısı */}
+			<Link
+				href={`/products?page=${currentPage + 1}${searchQuery ? `&search=${encodeURIComponent(searchQuery)}` : ""}${categoryQuery ? `&category=${encodeURIComponent(categoryQuery)}` : ""}`}
+				className={` ${currentPage < totalPages ? "pointer-events-auto text-primary" : "pointer-events-none text-tertiary"}`}
+				aria-label={`Sayfa ${currentPage + 1}`}
+			>
+				Sonraki
+			</Link>
+
+		</div>
+	);
 };
 
 export default Pagination;
