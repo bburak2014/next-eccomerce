@@ -14,7 +14,6 @@ interface ProductImageProps {
 
 const ProductImage = ({ src, alt, quality = 75, width = 100, height=100, fill = false }: ProductImageProps) => {
   const [isLoading, setIsLoading] = useState(true);
-console.log(src)
   return (
     <div
       style={{

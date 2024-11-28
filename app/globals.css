@@ -43,8 +43,18 @@ body {
 	height: 8px;
   }
   
+  /* styles.css veya benzeri bir dosyaya ekleyin */
+.scrollbar-hidden {
+    overflow-x: auto; /* Yatay kaydırmayı aktif et */
+    -ms-overflow-style: none;  /* Internet Explorer ve Edge için */
+    scrollbar-width: none;  /* Firefox için */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none; /* Chrome, Safari ve Opera için */
+}
   /* Smooth scroll */
   html {
 	scroll-behavior: smooth;
   }
-  
+ 

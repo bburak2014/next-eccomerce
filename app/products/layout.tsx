@@ -1,16 +1,15 @@
 
 import Navbar from '@/components/navbar';
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <section >
-      <Navbar />
-      <main className="">
-        {children}
-      </main>
-    </section>
-  );
+	return (
+
+		<main className='h-screen'>
+			<Navbar />
+			{children}
+		</main>
+	);
 }

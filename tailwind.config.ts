@@ -18,7 +18,8 @@ export default {
         green: "#00B500", // Focus border için
         black: "#000000",
         gray: "#626262",
-		customBorder:"#E2E8F0"
+		customBorder:"#E2E8F0",
+		detailBg:"#F2F2F2",
       },
       fontSize: {
         "2rem": "2rem",
@@ -38,8 +39,9 @@ export default {
         inter: ["inter", "sans-serif"],
       },
 	  borderWidth: {
-		"1": "1px"
-	  }
+		"1": "1px",
+		"1-5": "1.5px",
+	  },
     },
     variants: {
       extend: {

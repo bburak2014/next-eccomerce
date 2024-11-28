@@ -24,7 +24,6 @@ const CategorySelect: React.FC<CategorySelectProps> = ({ initialCategory, catego
 			setCategory(newCategory);  // Yeni kategori seçildi
 		}
 	};
-	console.log(category)
 	const handleClick = () => {
 		if (category) 
 			{
