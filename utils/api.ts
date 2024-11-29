@@ -18,10 +18,6 @@ export async function fetchProduct(id: string) {
 	return await fetchData(`/products/${id}`);
 }
 
-// Yorumları çekmek için API çağrısı
-export async function fetchComments(id: string) {
-	return await fetchData(`/comments/${id}`);
-}
 
 // Kategorileri çekmek için API çağrısı
 export async function fetchCategory() {

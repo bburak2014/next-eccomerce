@@ -47,7 +47,7 @@ const ProductImage = ({ src, alt, quality = 75, width = 100, height=100, fill = 
         fill={fill}
         width={fill ? undefined : width}
         height={fill ? undefined : height}
-        onLoadingComplete={() => setIsLoading(false)}
+        onLoad ={() => setIsLoading(false)}
         style={{
           objectFit: "cover", // Görüntüyü kırpmadan doldur
           opacity: isLoading ? 0 : 1,

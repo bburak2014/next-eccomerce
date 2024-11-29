@@ -24,8 +24,7 @@ interface ProductsPageProps {
 }
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
-	// searchParams'ı asenkron olarak almak ve await etmek
-	const { page, search, category } = await searchParams; // 'await' kullanmak gerekiyor.
+	const { page, search, category } = await searchParams;
 
 	const pageParam = page || "1"; // Eğer yoksa "1"
 	const currentPage = isNaN(Number(pageParam)) ? 1 : Number(pageParam); // Geçersiz bir parametre için varsayılan 1
@@ -58,9 +57,8 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 		searchQuery,
 		categoryQuery,
 	}
-
 	return (
-		<div className={`grid grid-cols-10 gap-8 px-5 py-2 lg:px-20 md:py-8 bg-background h-full ${poppins.className}`}>
+		<div className={`grid grid-cols-10 gap-8 px-5 py-2 lg:px-20 md:py-8 bg-background  ${poppins.className}`}>
 			<div className="col-span-10 md:col-span-4 lg:col-span-3 xl:col-span-2 w-full">
 				<div className='sticky top-[126px]'>
 					<SearchInput initialSearchQuery={searchQuery} />
