@@ -21,11 +21,14 @@ const Index = (props: Props) => {
 					alt={title}
 					quality={30}
 					fill={true}
+					priority={true}
+					unoptimized={true}
+
 				/>
 			</div>
 
 			{/* Alt Taraftaki Thumbnail Galerisi */}
-			<div className="flex gap-5 justify-start lg:justify-center items-center snap-x overflow-x-auto w-full scrollbar-hidden">
+			<div className="flex gap-5 justify-start items-center snap-x overflow-x-auto w-full scrollbar-hidden">
 				{data && data.map((image, index) => (
 					<div
 						key={index}
@@ -38,6 +41,7 @@ const Index = (props: Props) => {
 							quality={30}
 							height={100}
 							width={143.8}
+							unoptimized={true}
 						/>
 					</div>
 				))}

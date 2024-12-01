@@ -12,7 +12,7 @@ interface Product {
 	description: string;
 	price: number;
 	images: string[];
-	reviews: { reviewerName: string; comment: string }[];
+	reviews: { reviewerName: string; comment: string, rating: number }[];
 }
 
  
@@ -49,7 +49,6 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
 	if (!product) {
 		notFound(); // Ürün bulunamazsa 404 sayfasını göster
 	}
-	console.log(product)
 
 	return (
 

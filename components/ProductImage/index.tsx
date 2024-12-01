@@ -10,18 +10,32 @@ interface ProductImageProps {
   width?: number | `${number}` | undefined;
   height?: number;
   fill?: boolean;
+  priority?: boolean;
+  unoptimized?: boolean;
+  sizes?: string; // Kullanıcıya özel boyut
 }
 
-const ProductImage = ({ src, alt, quality = 75, width = 100, height=100, fill = false }: ProductImageProps) => {
+const ProductImage = ({ 
+  src, 
+  alt, 
+  quality = 75, 
+  width = 100, 
+  height = 100, 
+  fill = false, 
+  priority = false, 
+  unoptimized = false, 
+  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Varsayılan değer
+}: ProductImageProps) => {
   const [isLoading, setIsLoading] = useState(true);
+
   return (
     <div
       style={{
         position: "relative",
-        width: fill ? "100%" : width, // Ebeveynin genişliğini kaplar
-        paddingBottom: fill ? "100%" : undefined, // 1:1 en-boy oranı için
+        width: fill ? "100%" : `${width}px`,
+        paddingBottom: fill ? "100%" : undefined,
         overflow: "hidden",
-        borderRadius: "8px", // İsteğe bağlı yuvarlatma
+        borderRadius: "8px",
       }}
     >
       {/* Skeleton */}
@@ -47,13 +61,16 @@ const ProductImage = ({ src, alt, quality = 75, width = 100, height=100, fill = 
         fill={fill}
         width={fill ? undefined : width}
         height={fill ? undefined : height}
-        onLoad ={() => setIsLoading(false)}
+        priority={priority}
+        sizes={fill ? sizes : undefined} // Sadece fill için sizes eklenir
+        onLoad={() => setIsLoading(false)}
         style={{
-          objectFit: "cover", // Görüntüyü kırpmadan doldur
+          objectFit: "contain",
           opacity: isLoading ? 0 : 1,
           transition: "opacity 0.3s ease-in-out",
         }}
         quality={quality}
+        unoptimized={unoptimized}
       />
     </div>
   );

@@ -68,9 +68,9 @@ export default function LoginPage() {
 	return (
 		<div className="flex items-center justify-center h-screen">
 			<div className="hidden lg:flex w-full h-full lg:w-[58%] flex-col p-10 gap-27 bg-background">
-				<Image className='' src="/images/logo.png" alt="Logo" width={234} height={46} />
+				<Image className='' src="/images/logo.png" alt="Logo" width={234} height={46} priority/>
 				<div className='flex items-center flex-col gap-16'>
-					<Image src="/images/Frame.png" alt="Logo" width={411} height={411} />
+					<Image src="/images/Frame.png" alt="Frame" width={411} height={411} />
 					<div className='flex flex-col gap-6'>
 						<p className="font-bold text-2rem leading-primary text-primary">Let Free Your Creativity with
 							Our Intuitive Content Creator

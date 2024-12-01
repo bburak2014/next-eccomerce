@@ -18,48 +18,56 @@ export default {
         green: "#00B500", // Focus border için
         black: "#000000",
         gray: "#626262",
-		customBorder:"#E2E8F0",
-		detailBg:"#F2F2F2",
-		"gray-custom-1":"#888888",
-		"gray-custom-2":"#C0C0C0",
-		"gray-custom-3":"#8D8D8D",
-		"black-custom-1":"#1E1E21",
+        customBorder: "#E2E8F0",
+        detailBg: "#F2F2F2",
+        "gray-custom-1": "#888888",
+        "gray-custom-2": "#C0C0C0",
+        "gray-custom-3": "#8D8D8D",
+        "black-custom-1": "#1E1E21",
+        "green-custom-1": "#E6FFE6",
       },
       fontSize: {
         "2rem": "2rem",
-		"2.5rem": "2.5rem",
+        "2.5rem": "2.5rem",
       },
       lineHeight: {
         primary: "2.421rem",
         secondary: "1.21rem",
         tertiary: "1.059rem",
-		"13": "3.438rem",
-		"1.875": "1.875rem",
-		"custom-22": "1.375rem",
+        "13": "3.438rem",
+        "1.875": "1.875rem",
+        "custom-22": "1.375rem",
 
       },
       gap: {
         "27": "6.75rem",
-		"custom-10": "0.625rem",
-		"custom-9": "0.563rem",
-		"custom-7": "0.438rem",
+        "custom-10": "0.625rem",
+        "custom-9": "0.563rem",
+        "custom-7": "0.438rem",
       },
       maxWidth: {
         form: "27.063rem",
       },
-	  width: {
-		"145": "9.063rem",
-	  },
+      width: {
+        "145": "9.063rem",
+        "44": "2.75rem",
+      },
+      height: {
+         "44": "2.75rem",
+      },
+      padding: {
+        "y-10": "0.625rem 0",
+      },
       fontFamily: {
         inter: ["inter", "sans-serif"],
         poppins: ["poppins", "sans-serif"],
         roboto: ["roboto", "sans-serif"],
       },
-	  borderWidth: {
-		"0.5": "0.5px",
-		"1": "1px",
-		"1-5": "1.5px",
-	  },
+      borderWidth: {
+        "0.5": "0.5px",
+        "1": "1px",
+        "1-5": "1.5px",
+      },
     },
     variants: {
       extend: {
