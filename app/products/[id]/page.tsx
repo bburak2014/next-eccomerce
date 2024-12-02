@@ -6,6 +6,7 @@ import ımageGallery from "@/components/ImageGallery";
 import ColorCard from "@/components/UI/ColorCard";
 import FeaturesCard from "@/components/UI/FeaturesCard";
 import CommentsCard from "@/components/CommentsCard";
+import CartInfo from "@/components/CartInfo";
 
 interface Product {
 	title: string;
@@ -51,7 +52,7 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
 	}
 
 	return (
-
+		<>
 		<div className="grid grid-cols-1 md:grid-cols-[36.8%_59.9%] gap-[42px] px-5 py-2 lg:px-20 md:py-14 h-full bg-white font-poppins">
 			<ımageGallery data={product?.images} title={product.title} />
 			<div className="flex gap-14 flex-col">
@@ -72,6 +73,8 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
 				</div>
 			</div>
 		</div>
+		<CartInfo />
 
+		</>
 	);
 }

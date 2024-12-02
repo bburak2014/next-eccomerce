@@ -1,8 +1,8 @@
-const LoadingUI = ( { height="h-screen" }: { height: string }) => {
+const LoadingUI = ( { height="h-screen",classCustom=" " }: { height: string ,classCustom:string}) => {
     return (
       <div className={`flex items-center justify-center flex-1 ${height}`}>
         <svg
-          className="w-16 h-16 animate-spin text-blue-500"
+          className={"w-16 h-16 animate-spin text-green "+classCustom}
           viewBox="0 0 64 64"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

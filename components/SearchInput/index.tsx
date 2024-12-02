@@ -54,7 +54,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ initialSearchQuery }) => {
 		<form onSubmit={(e) => e.preventDefault()}>
 			<div className="relative pl-11 pr-4 py-3  border rounded-lg ">
 				<span className="absolute inset-y-0 left-4 flex items-center">
-				<Image src="/icons/icon_search.svg" alt="Search" width={20} height={20} />
+				<Image src="/icons/search.svg" alt="Search" width={20} height={20} />
 				</span>
 				<input
 					type="text"

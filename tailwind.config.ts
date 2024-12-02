@@ -25,6 +25,7 @@ export default {
         "gray-custom-3": "#8D8D8D",
         "black-custom-1": "#1E1E21",
         "green-custom-1": "#E6FFE6",
+        orange: "#cb7700",
       },
       fontSize: {
         "2rem": "2rem",
@@ -37,7 +38,6 @@ export default {
         "13": "3.438rem",
         "1.875": "1.875rem",
         "custom-22": "1.375rem",
-
       },
       gap: {
         "27": "6.75rem",
@@ -53,7 +53,7 @@ export default {
         "44": "2.75rem",
       },
       height: {
-         "44": "2.75rem",
+        "44": "2.75rem",
       },
       padding: {
         "y-10": "0.625rem 0",
