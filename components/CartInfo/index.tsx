@@ -13,7 +13,7 @@ type Props = {
 const Index = (props: Props) => {
 	const { productData, addProductData, totalPrice } = useProductData();
 	const { productId, price, title, description, thumbnail } = props
-	const isInCart = productData?.some((item) => item.id === Number(productId));
+	const isInCart = productData?.some((item) => item?.id?.toString() === productId);
 
 	return (
 		<div className='w-full flex justify-between items-center  border-t-0.5  border-[#C1C1C1] flex-wrap font-poppins sticky bottom-0 left-0 z-50 bg-white'>
