@@ -19,10 +19,12 @@ interface Product {
 
 
 
-
+interface Params {
+    id: string;  // This represents the dynamic route parameter
+}
 
 // Dynamic metadata
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }:{params:Params} ): Promise<Metadata> {
     const { id } = await params; // Directly use params.id (no need for await)
     const product = await fetchProduct(id) as Product;
 
@@ -43,7 +45,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
 
 // Product details page
-export default async function ProductDetailPage({ params }: { params: { id: string } }) {
+export default async function ProductDetailPage({ params }: { params: Params }) {
     const { id } = await params; // Directly use params.id (no need for await)
     const product = await fetchProduct(id) as Product;
 
