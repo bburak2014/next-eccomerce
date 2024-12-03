@@ -23,10 +23,10 @@ interface Product {
 
 // Dynamic metadata
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-    const { id } =await params; // Access params directly here
+    const { id } = await params; // Directly use params.id (no need for await)
     const product = await fetchProduct(id) as Product;
 
-    // Return default metadata if the product is not found
+    // If product is not found, return default metadata
     if (!product) {
         return {
             title: "Ürün Bulunamadı",
@@ -44,15 +44,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
 // Product details page
 export default async function ProductDetailPage({ params }: { params: { id: string } }) {
-    const { id } = await params;
-    let product: Product | null = null;
-
-    try {
-        product = await fetchProduct(id) as Product;
-    } catch (error) {
-        console.error('Failed to fetch product:', error);
-        notFound();
-    }
+    const { id } = await params; // Directly use params.id (no need for await)
+    const product = await fetchProduct(id) as Product;
 
     if (!product) {
         notFound(); // Return 404 if product is not found
@@ -84,3 +77,4 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
         </>
     );
 }
+
