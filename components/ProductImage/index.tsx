@@ -12,7 +12,7 @@ interface ProductImageProps {
   fill?: boolean;
   priority?: boolean;
   unoptimized?: boolean;
-  sizes?: string; // Kullanıcıya özel boyut
+  sizes?: string; // sizes attribute for responsive images
 }
 
 const ProductImage = ({ 
@@ -24,7 +24,7 @@ const ProductImage = ({
   fill = false, 
   priority = false, 
   unoptimized = false, 
-  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Varsayılan değer
+  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // default sizes
 }: ProductImageProps) => {
   const [isLoading, setIsLoading] = useState(true);
 

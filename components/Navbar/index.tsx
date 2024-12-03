@@ -6,9 +6,9 @@ import LoadingUI from '@/components/LoadingUI';
 import Cart from '@/components/Cart';
 import { useUserData } from '@/app/context/UserContext';
 import React, { useState, useEffect, useRef } from 'react';
-
+ 
 export default function Navbar() {
-  const { userData } = useUserData(); // Global kullanıcı verisini alıyoruz
+  const { userData } = useUserData(); 
   const { firstName, lastName } = userData || {};
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showCart, setshowCart] = useState(false);
@@ -68,9 +68,9 @@ export default function Navbar() {
 				<button onClick={()=>setshowCart(!showCart)} className='block px-4 py-2 w-full text-gray-800 hover:bg-slate-100 hover:text-black-custom-1 transition duration-300 rounded-lg text-start'>
 				  Sepetim
 				</button>
-				<Link href="/logout" className='block px-4 py-2 text-gray-800 hover:bg-slate-100 hover:text-black-custom-1 transition duration-300 rounded-lg'>
+				<button  className='block px-4 py-2 text-gray-800 hover:bg-slate-100 hover:text-black-custom-1 transition duration-300 rounded-lg'>
                   Çıkış Yap
-                </Link>
+                </button>
               </div>
             )}
           </div>

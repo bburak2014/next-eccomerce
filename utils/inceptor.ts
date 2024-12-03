@@ -1,14 +1,14 @@
 export async function fetchData<T>(
 	endpoint: string,
 	options?: {
-	  method?: 'GET' | 'POST' | 'PUT' | 'DELETE'; // HTTP metodları
-	  headers?: Record<string, string>; // Ek başlıklar
+	  method?: 'GET' | 'POST' | 'PUT' | 'DELETE'; // HTTP method
+	  headers?: Record<string, string>; // HTTP headers
 	  body?: Record<string, unknown> | null; // JSON body
-	  includeCredentials?: boolean; // Cookie gönderimi için
+	  includeCredentials?: boolean; // Cookie include
 	}
   ): Promise<T> {
 	const {
-	  method = 'GET', // Varsayılan olarak GET
+	  method = 'GET', // default  GET
 	  headers = {},
 	  body = null,
 	  includeCredentials = false,

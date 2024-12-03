@@ -8,14 +8,14 @@ interface PaginationProps {
 }
 
 const Pagination = ({ currentPage, totalPages, searchQuery, categoryQuery }: PaginationProps) => {
-	// Sayfa numaralarını göstermek için aralık ayarları
+	// pagination logic
 	const maxPageNumbersToShow = 3;
 	const halfRange = Math.floor(maxPageNumbersToShow / 2);
 
 	let startPage = Math.max(currentPage - halfRange, 1);
 	let endPage = Math.min(currentPage + halfRange, totalPages);
 
-	// Sayfa numaralarını 1'e ve totalPages'e yakınlaştırma
+	// pagination logic
 	if (currentPage <= halfRange) {
 		startPage = 1;
 		endPage = Math.min(maxPageNumbersToShow, totalPages);
@@ -47,7 +47,7 @@ const Pagination = ({ currentPage, totalPages, searchQuery, categoryQuery }: Pag
 				Prev
 			</Link>
 
-			{/* Sayfa numaraları */}
+			{/* page numbers */}
 			{startPage > 1 && (
 				<>
 					<Link
@@ -77,7 +77,7 @@ const Pagination = ({ currentPage, totalPages, searchQuery, categoryQuery }: Pag
 				</>
 			)}
 
-			{/* Sonraki sayfa bağlantısı */}
+			{/* next page link */}
 			<Link
 				href={`/products?page=${currentPage + 1}${searchQuery ? `&search=${encodeURIComponent(searchQuery)}` : ""}${categoryQuery ? `&category=${encodeURIComponent(categoryQuery)}` : ""}`}
 				className={` ${currentPage < totalPages ? "pointer-events-auto text-primary" : "pointer-events-none text-tertiary"}`}

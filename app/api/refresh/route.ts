@@ -21,12 +21,12 @@ export async function POST() {
     if (response.ok) {
       const { accessToken } = await response.json();
 
-      // Yeni accessToken'i güncelle
+      // Update new access token
       (await cookies()).set("token", accessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
-        maxAge: 60 * 15, // 15 dakika
+        maxAge: 60 * 15, // 15 minutes
         path: "/",
       });
 
@@ -35,7 +35,7 @@ export async function POST() {
       const errorData = await response.json();
       return NextResponse.json({ error: errorData.message || "Refresh failed" }, { status: 401 });
     }
-  } catch (error: unknown) {
+  } catch {
     return NextResponse.json(
       { error: "An error occurred" },
       {

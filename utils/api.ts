@@ -2,7 +2,7 @@ import { fetchData } from "@/utils/inceptor";
 import { ProductResponse } from "@/utils/type";
 import { cookies } from "next/headers";
 
-// Ürünler için API çağrısı
+// get all products
 export async function fetchProducts(
   limit: number,
   skip: number,
@@ -18,17 +18,17 @@ export async function fetchProducts(
   return await fetchData<ProductResponse>(endpoint);
 }
 
-// Tek bir ürünü almak için API çağrısı
+// get single product
 export async function fetchProduct(id: string) {
   return await fetchData(`/products/${id}`);
 }
 
-// Kategorileri çekmek için API çağrısı
+// get all categories
 export async function fetchCategory() {
   return await fetchData(`/products/category-list`);
 }
 
-//profile bilgileri
+//get auth me
 export async function fetchMe() {
   const cookieStore = await cookies();
   try {
@@ -45,29 +45,3 @@ export async function fetchMe() {
     throw error;
   }
 }
-
-// cart bilgisi  almak için API çağrısı
-export async function fetchCartByUser(userID: string) {
-  return await fetchData(`/carts/user/${userID}`);
-}
-
-export async function postCart(userID: number, products: Array<{ id: number; quantity: number }>) {
-	try {
-	  const response = await fetch(`${process.env.BASE_URL || process.env.NEXT_PUBLIC_BASE_URL}/carts/add`, {
-		method: "POST",
-		headers: {
-		  'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({ userID, products }),
-	  });
-  
-	  if (!response.ok) {
-		throw new Error(`Hata: ${response.status} - ${response.statusText}`);
-	  }
-  
-	  return await response.json();
-	} catch (error) {
-	  console.error("Sepet eklenirken hata oluştu:", error);
-	  throw error;
-	}
-  }

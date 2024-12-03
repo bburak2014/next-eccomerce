@@ -13,24 +13,24 @@ const CategorySelect: React.FC<CategorySelectProps> = ({ initialCategory, catego
 	const [category, setCategory] = useState(initialCategory);
 	const router = useRouter();
 
-	// Kategori değiştiğinde çağrılır
+	// category onchange event
 	const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newCategory = e.target.value;
 
-		// Eğer aynı kategori seçiliyse, seçimi sıfırla
+		// if the category is already selected, unselect it
 		if (category === newCategory) {
-			setCategory("");  // Kategoriyi sıfırla
+			setCategory("");  // category is unselected
 		} else {
-			setCategory(newCategory);  // Yeni kategori seçildi
+			setCategory(newCategory);  // category is selected
 		}
 	};
 	const handleClick = () => {
 		if (category) 
 			{
-				router.push(`/products?category=${category}`);  // Seçilen kategori ile yönlendir
+				router.push(`/products?category=${category}`);  // selected category is shown
 			}
 	  else {
-			router.push(`/products`);  // Kategori seçili değilse ürün sayfasını göster
+			router.push(`/products`);  // else all categories are shown
 		}
 	}
 	useEffect(() => {
@@ -49,23 +49,20 @@ const CategorySelect: React.FC<CategorySelectProps> = ({ initialCategory, catego
 			<div className="flex items-start flex-col gap-4 max-h-[21vh] overflow-y-auto">
 				{categories?.map((item) => (
 					<div key={item} className="flex gap-[10px] items-center">
-						{/* Checkbox kullanıyoruz */}
-						<input
+ 						<input
 							type="checkbox"
 							id={item}
 							name="category"
 							value={item}
 							onChange={handleCategoryChange}
-							checked={category === item}  // Seçili kategori kontrolü
-							className="hidden peer" // Görünümünü gizle, ancak işlevi koru
+							checked={category === item}   
+							className="hidden peer"  
 						/>
-						{/* Bu label, checkbox'ı temsil eder */}
-						<label
+ 						<label
 							htmlFor={item}
 							className="w-5 h-5 border-2 border-gray-500 flex items-center justify-center cursor-pointer peer-checked:bg-green peer-checked:border-transparent"
 						>
-							{/* Seçildiğinde tick işareti eklemek için */}
-							<span
+ 							<span
 								className={`w-[17px] h-[17px] flex items-center justify-center text-white transition-all duration-300 ${category === item ? "opacity-1" : "opacity-0"
 									} peer-checked:opacity-100 peer-checked:scale-100`}
 							>

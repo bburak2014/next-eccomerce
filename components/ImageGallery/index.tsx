@@ -13,7 +13,7 @@ const Index = (props: Props) => {
 
 	return (
 		<div className="flex flex-col items-center gap-5">
-			{/* Üstteki Ana Resim */}
+			{/* Main image */}
 			<div className="bg-detailBg w-full">
 				<ProductImage
 					key={0}
@@ -27,7 +27,7 @@ const Index = (props: Props) => {
 				/>
 			</div>
 
-			{/* Alt Taraftaki Thumbnail Galerisi */}
+			{/* image gallery */}
 			<div className="flex gap-5 justify-start items-center snap-x overflow-x-auto w-full scrollbar-hidden">
 				{data && data.map((image, index) => (
 					<div

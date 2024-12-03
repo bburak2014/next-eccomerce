@@ -20,21 +20,21 @@ export async function POST(request: NextRequest) {
 
       const cookieStore = await cookies();
 
-      // Access token çerezi
+      // Access token cookie
       cookieStore.set("token", accessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
-        maxAge: 60 * 15, // 15 dakika
+        maxAge: 60 * 15, // 15 minutes
         path: "/",
       });
 
-      // Refresh token çerezi
+      // Refresh token cookie
       cookieStore.set("refreshToken", refreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
-        maxAge: 60 * 60, // 1 saat
+        maxAge: 60 * 60, // 1 hour
         path: "/",
       });
 

@@ -21,13 +21,13 @@ interface Product {
 
 
 
-// Meta verileri oluştururken çekilen ürün verisini kullan
+// Dynamic metadata
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-	const { id } = await params; // 'await' kullanmak gerekiyor.
+	const { id } = await params; 
 
-	const product = await fetchProduct(id) as Product; // Ürün verisini bir kez çek
+	const product = await fetchProduct(id) as Product; 
 
-	// Eğer ürün bulunamazsa, ürün bulunamadı meta verilerini döndür
+	// Else, return default metadata
 	if (!product) {
 		return {
 			title: "Ürün Bulunamadı",
@@ -41,15 +41,15 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 	};
 }
 
-// Ürün detay sayfası bileşeni
+// Product details page
 export default async function ProductDetailPage({ params }: { params: { id: string } }) {
-	const { id } = await params; // 'await' kullanmak gerekiyor.	
+	const { id } = await params;	
 	const [product]: [Product] = await Promise.all([
 		fetchProduct(id) as Promise<Product>,
 	]);
 
 	if (!product) {
-		notFound(); // Ürün bulunamazsa 404 sayfasını göster
+		notFound(); // else return 404
 	}
 	const productProps = { productId: id, price: product.price, title: product.title, description: product.description, thumbnail: product.thumbnail };
 

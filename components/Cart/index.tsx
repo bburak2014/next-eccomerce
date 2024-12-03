@@ -52,7 +52,7 @@ const Index: React.FC<Props> = (props) => {
 						productData.map((item) => (
 							<div
 								key={item.id}
-								className="flex items-center justify-between group" // 'group' sınıfını ekliyoruz
+								className="flex items-center justify-between group"
 							>
 								<div className="flex items-center space-x-4">
 									<ProductImage
@@ -72,7 +72,7 @@ const Index: React.FC<Props> = (props) => {
 								</div>
 								<button
 									onClick={() => removeProductData({ id: item.id })}
-									className="hidden group-hover:block transititon ease-out-300" // 'group-hover:block' ile hover durumunda görünür yapıyoruz
+									className="hidden group-hover:block transititon ease-out-300" 
 								>
 									<Trash />
 								</button>

@@ -12,13 +12,13 @@ import Pagination from "@/components/Pagination";
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400', '700'] });
 
-// Metadata bilgisi
+// Metadata Info
 export const metadata: Metadata = {
 	title: "Ürünler",
 	description: "Ürün listeleme sayfası",
 };
 
-// Sayfa bileşeni için gerekli props
+// Products Page
 interface ProductsPageProps {
 	searchParams: { page?: string; search?: string; category?: string };
 }
@@ -26,11 +26,11 @@ interface ProductsPageProps {
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
 	const { page, search, category } = await searchParams;
 
-	const pageParam = page || "1"; // Eğer yoksa "1"
-	const currentPage = isNaN(Number(pageParam)) ? 1 : Number(pageParam); // Geçersiz bir parametre için varsayılan 1
-	const skip = (currentPage - 1) * PAGE_LIMIT; // Skip değeri hesapla
-	const searchQuery = search || ""; // Arama sorgusu
-	const categoryQuery = category || ""; // Kategori sorgusu
+	const pageParam = page || "1"; // else default 1
+	const currentPage = isNaN(Number(pageParam)) ? 1 : Number(pageParam); 
+	const skip = (currentPage - 1) * PAGE_LIMIT; // calculate skip
+	const searchQuery = search || ""; // search query
+	const categoryQuery = category || ""; // search category
 
 	let data: ProductResponse;
 	let categories: string[];
@@ -49,7 +49,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 		);
 	}
 
-	const totalPages = Math.ceil(data.total / PAGE_LIMIT); // Toplam sayfa sayısı
+	const totalPages = Math.ceil(data.total / PAGE_LIMIT); // Total pages
 
 	const paginationProps = {
 		currentPage,

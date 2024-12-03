@@ -3,7 +3,6 @@
 "use client";
 
 import Image from 'next/image'
-import { it } from 'node:test';
 import React, { useState } from 'react'
 
 const data = [
