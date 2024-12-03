@@ -1,5 +1,4 @@
 //product detail
-import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { fetchProduct } from "@/utils/api";
 import ımageGallery from "@/components/ImageGallery";
@@ -19,16 +18,14 @@ interface Product {
 
 
 
-interface Params {
-    id: string;  // This represents the dynamic route parameter
-}
+
 
 // Dynamic metadata
-export async function generateMetadata({ params }:{params:Params} ): Promise<Metadata> {
-    const { id } = await params; // Directly use params.id (no need for await)
+export async function generateMetadata({params}: {params: Promise<{ id: string }>}) {
+	const { id } = await params;	
     const product = await fetchProduct(id) as Product;
 
-    // If product is not found, return default metadata
+    // Return default metadata if the product is not found
     if (!product) {
         return {
             title: "Ürün Bulunamadı",
@@ -45,38 +42,41 @@ export async function generateMetadata({ params }:{params:Params} ): Promise<Met
 
 
 // Product details page
-export default async function ProductDetailPage({ params }: { params: Params }) {
-    const { id } = await params; // Directly use params.id (no need for await)
-    const product = await fetchProduct(id) as Product;
+export default async function ProductDetailPage({params}: {params: Promise<{ id: string }>}) {
+	const { id } = await params;	
+	const [product]: [Product] = await Promise.all([
+		fetchProduct(id) as Promise<Product>,
+	]);
 
-    if (!product) {
-        notFound(); // Return 404 if product is not found
-    }
+	if (!product) {
+		notFound(); // else return 404
+	}
+	const productProps = { productId: id, price: product.price, title: product.title, description: product.description, thumbnail: product.thumbnail };
 
-    const productProps = { productId: id, price: product.price, title: product.title, description: product.description, thumbnail: product.thumbnail };
+	return (
+		<>
+			<div className="grid grid-cols-1 md:grid-cols-[36.8%_59.9%] gap-[42px] px-5 py-2 lg:px-20 md:py-14 h-full bg-white font-poppins">
+				<ımageGallery data={product?.images} title={product.title} />
+				<div className="flex gap-14 flex-col">
+					<div className="flex gap-custom-10 flex-col items-start">
+						{product.title && <h1 className="text-2.5rem text-black font-bold leading-13">{product.title}</h1>}
+						{product.description && <p className="font-normal text-xl leading-1.875 text-gray-custom-1">{product.description}</p>}
+					</div>
+					<ColorCard />
+					<FeaturesCard />
+					<div>
+						{!product?.reviews ? (
+							<p className="text-gray-500">Yorumlar alınamadı.</p>
+						) : (
+							<CommentsCard reviews={product?.reviews} />
 
-    return (
-        <>
-            <div className="grid grid-cols-1 md:grid-cols-[36.8%_59.9%] gap-[42px] px-5 py-2 lg:px-20 md:py-14 h-full bg-white font-poppins">
-                <ımageGallery data={product.images} title={product.title} />
-                <div className="flex gap-14 flex-col">
-                    <div className="flex gap-custom-10 flex-col items-start">
-                        {product.title && <h1 className="text-2.5rem text-black font-bold leading-13">{product.title}</h1>}
-                        {product.description && <p className="font-normal text-xl leading-1.875 text-gray-custom-1">{product.description}</p>}
-                    </div>
-                    <ColorCard />
-                    <FeaturesCard />
-                    <div>
-                        {!product.reviews?.length ? (
-                            <p className="text-gray-500">Yorumlar alınamadı.</p>
-                        ) : (
-                            <CommentsCard reviews={product.reviews} />
-                        )}
-                    </div>
-                </div>
-            </div>
-            <CartInfo {...productProps} />
-        </>
-    );
+						)}
+
+					</div>
+				</div>
+			</div>
+			<CartInfo {...productProps} />
+
+		</>
+	);
 }
-
