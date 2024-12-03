@@ -13,10 +13,11 @@ interface Product {
 	description: string;
 	price: number;
 	images: string[];
+	thumbnail: string;
 	reviews: { reviewerName: string; comment: string, rating: number }[];
 }
 
- 
+
 
 
 
@@ -45,35 +46,36 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
 	const { id } = await params; // 'await' kullanmak gerekiyor.	
 	const [product]: [Product] = await Promise.all([
 		fetchProduct(id) as Promise<Product>,
- 	]);
+	]);
 
 	if (!product) {
 		notFound(); // Ürün bulunamazsa 404 sayfasını göster
 	}
+	const productProps = { productId: id, price: product.price, title: product.title, description: product.description, thumbnail: product.thumbnail };
 
 	return (
 		<>
-		<div className="grid grid-cols-1 md:grid-cols-[36.8%_59.9%] gap-[42px] px-5 py-2 lg:px-20 md:py-14 h-full bg-white font-poppins">
-			<ımageGallery data={product?.images} title={product.title} />
-			<div className="flex gap-14 flex-col">
-				<div className="flex gap-custom-10 flex-col items-start">
-					{product.title && <h1 className="text-2.5rem text-black font-bold leading-13">{product.title}</h1>}
-					{product.description && <p className="font-normal text-xl leading-1.875 text-gray-custom-1">{product.description}</p>}
-				</div>
-				 <ColorCard />
-				 <FeaturesCard />
-				<div>
-					{!product?.reviews ? (
-						<p className="text-gray-500">Yorumlar alınamadı.</p>
-					) : (
-						<CommentsCard reviews={product?.reviews} />
-						 
-					)}
+			<div className="grid grid-cols-1 md:grid-cols-[36.8%_59.9%] gap-[42px] px-5 py-2 lg:px-20 md:py-14 h-full bg-white font-poppins">
+				<ımageGallery data={product?.images} title={product.title} />
+				<div className="flex gap-14 flex-col">
+					<div className="flex gap-custom-10 flex-col items-start">
+						{product.title && <h1 className="text-2.5rem text-black font-bold leading-13">{product.title}</h1>}
+						{product.description && <p className="font-normal text-xl leading-1.875 text-gray-custom-1">{product.description}</p>}
+					</div>
+					<ColorCard />
+					<FeaturesCard />
+					<div>
+						{!product?.reviews ? (
+							<p className="text-gray-500">Yorumlar alınamadı.</p>
+						) : (
+							<CommentsCard reviews={product?.reviews} />
 
+						)}
+
+					</div>
 				</div>
 			</div>
-		</div>
-		<CartInfo />
+			<CartInfo {...productProps} />
 
 		</>
 	);

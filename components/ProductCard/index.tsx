@@ -40,7 +40,7 @@ const Index = (props: Props) => {
 							</div>
 						</div>
 					</Link>
-					<ProductAddCartButton productId={product.id} />
+					<ProductAddCartButton productId={product.id} price={product.price} title={product.title} thumbnail={product.thumbnail} />
 				</div>
 			))}
 		</>

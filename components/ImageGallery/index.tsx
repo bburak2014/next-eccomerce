@@ -14,7 +14,7 @@ const Index = (props: Props) => {
 	return (
 		<div className="flex flex-col items-center gap-5">
 			{/* Üstteki Ana Resim */}
-			<div className="bg-detailBg p-2 w-full">
+			<div className="bg-detailBg w-full">
 				<ProductImage
 					key={0}
 					src={selectedImage}

@@ -10,7 +10,7 @@ interface Props {
 }
 
 
-const index = (props: Props) => {
+const Index = (props: Props) => {
 
 	const { reviews } = props
 	const [showReviews, setShowReviews] = useState(reviews?.length > 2 ? 2 : reviews?.length)
@@ -55,4 +55,4 @@ const index = (props: Props) => {
 
 }
 
-export default index
+export default Index

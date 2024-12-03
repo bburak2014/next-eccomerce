@@ -16,6 +16,7 @@ export default {
         tertiary: "#94A3B8",
         inputBg: "#F1F5F9", // Arka plan için
         green: "#00B500", // Focus border için
+		"green-300": "rgb(134 239 172)", 	
         black: "#000000",
         gray: "#626262",
         customBorder: "#E2E8F0",
@@ -30,6 +31,8 @@ export default {
       fontSize: {
         "2rem": "2rem",
         "2.5rem": "2.5rem",
+        "22": "1.375rem",
+        "34": "2.125rem",
       },
       lineHeight: {
         primary: "2.421rem",
@@ -38,6 +41,8 @@ export default {
         "13": "3.438rem",
         "1.875": "1.875rem",
         "custom-22": "1.375rem",
+        "custom-33": "2.063rem",
+		"custom-46": "2.875rem"
       },
       gap: {
         "27": "6.75rem",
@@ -67,6 +72,9 @@ export default {
         "0.5": "0.5px",
         "1": "1px",
         "1-5": "1.5px",
+      },
+      letterSpacing: {
+        "1p": "1%",
       },
     },
     variants: {
