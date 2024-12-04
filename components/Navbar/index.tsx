@@ -6,14 +6,17 @@ import LoadingUI from '@/components/LoadingUI';
 import Cart from '@/components/Cart';
 import { useUserData } from '@/app/context/UserContext';
 import React, { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
  
 export default function Navbar() {
   const { userData } = useUserData(); 
   const { firstName, lastName } = userData || {};
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showCart, setshowCart] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(false);
+   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter(); // useRouter hook'u kullanılıyor
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -37,6 +40,27 @@ export default function Navbar() {
     };
   }, []);
 
+ 
+
+  const handleLogout = async () => {
+    setLoading(true);
+ 
+    try {
+      const response = await fetch("/api/logout", {
+        method: "POST", 
+      });
+
+      if (!response.ok) {
+        throw new Error("Çıkış yapılırken bir hata oluştu.");
+      }
+
+       router.push("/");
+    } catch {
+		alert("Çıkış işlemi sırasında bir hata oluştu" );
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className='flex items-center flex-wrap gap-4 justify-center sm:justify-between px-8 py-7 sticky top-0 left-0 w-full bg-white border-b-2 border-b-customBorder z-50'>
       <Link href={'/products'}>
@@ -68,9 +92,10 @@ export default function Navbar() {
 				<button onClick={()=>setshowCart(!showCart)} className='block px-4 py-2 w-full text-gray-800 hover:bg-slate-100 hover:text-black-custom-1 transition duration-300 rounded-lg text-start'>
 				  Sepetim
 				</button>
-				<button  className='block px-4 py-2 text-gray-800 hover:bg-slate-100 hover:text-black-custom-1 transition duration-300 rounded-lg'>
-                  Çıkış Yap
+				<button onClick={handleLogout} className='block px-4 py-2 text-gray-800 hover:bg-slate-100 hover:text-black-custom-1 transition duration-300 rounded-lg w-full text-start'>
+				{loading ? "Çıkış Yapılıyor..." : "Çıkış Yap"}
                 </button>
+ 
               </div>
             )}
           </div>
