@@ -21,8 +21,11 @@ interface Product {
 
 
 // Dynamic metadata
-export async function generateMetadata({params}: {params: { id: string }}) {
-	const { id } = await params;	
+export async function generateMetadata({ params }: { params: { id: string } }) {
+	const { id } =  params;	
+	if (!id) {
+        throw new Error("ID parametresi eksik.");
+    }
     const product = await fetchProduct(id) as Product;
 
     // Return default metadata if the product is not found
@@ -43,7 +46,10 @@ export async function generateMetadata({params}: {params: { id: string }}) {
 
 // Product details page
 export default async function ProductDetailPage({params}: {params: { id: string }}) {
-	const { id } = await params;	
+	const { id } =  params;	
+	if (!id) {
+        throw new Error("ID parametresi eksik.");
+    }
 	const [product]: [Product] = await Promise.all([
 		fetchProduct(id) as Promise<Product>,
 	]);
