@@ -21,7 +21,7 @@ interface Product {
 
 
 // Dynamic metadata
-export async function generateMetadata({params}: {params: Promise<{ id: string }>}) {
+export async function generateMetadata({params}: {params: { id: string }}) {
 	const { id } = await params;	
     const product = await fetchProduct(id) as Product;
 
@@ -42,7 +42,7 @@ export async function generateMetadata({params}: {params: Promise<{ id: string }
 
 
 // Product details page
-export default async function ProductDetailPage({params}: {params: Promise<{ id: string }>}) {
+export default async function ProductDetailPage({params}: {params: { id: string }}) {
 	const { id } = await params;	
 	const [product]: [Product] = await Promise.all([
 		fetchProduct(id) as Promise<Product>,

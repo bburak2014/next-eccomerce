@@ -24,7 +24,7 @@ interface ProductsPageProps {
 }
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
-	const { page, search, category } = await searchParams;
+	const { page, search, category } =  searchParams;
 
 	const pageParam = page || "1"; // else default 1
 	const currentPage = isNaN(Number(pageParam)) ? 1 : Number(pageParam); 
