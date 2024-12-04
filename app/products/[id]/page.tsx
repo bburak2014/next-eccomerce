@@ -6,6 +6,7 @@ import ColorCard from "@/components/UI/ColorCard";
 import FeaturesCard from "@/components/UI/FeaturesCard";
 import CommentsCard from "@/components/CommentsCard";
 import CartInfo from "@/components/CartInfo";
+import { Metadata } from "next";
 
 interface Product {
 	title: string;
@@ -16,16 +17,11 @@ interface Product {
 	reviews: { reviewerName: string; comment: string, rating: number }[];
 }
 
-interface PageProps {
-	params: {
-	  id: string;
-	};
-  }
-  
+ 
 
 
 
-  export async function generateMetadata({ params }: PageProps) {
+  export async function generateMetadata({ params }: {params:{id:string}}): Promise<Metadata> {
 	const { id } = params;
 	if (!id) {
 	  throw new Error("ID parametresi eksik.");
@@ -45,15 +41,17 @@ interface PageProps {
 	};
   }
   
-  export default async function ProductDetailPage({ params }: PageProps) {
+  export default async function ProductDetailPage({ params }: {params:{id:string}}) {
 	const { id } = params;
+  
 	if (!id) {
 	  throw new Error("ID parametresi eksik.");
 	}
+  
 	const product = await fetchProduct(id) as Product;
   
 	if (!product) {
-	  notFound(); // else return 404
+	  notFound();
 	}
   
 	const productProps = {
@@ -65,6 +63,7 @@ interface PageProps {
 	};
   
 	return (
+	<>
 	  <div className="grid grid-cols-1 md:grid-cols-[36.8%_59.9%] gap-[42px] px-5 py-2 lg:px-20 md:py-14 h-full bg-white font-poppins">
 		<ımageGallery data={product.images} title={product.title} />
 		<div className="flex gap-14 flex-col">
@@ -80,8 +79,11 @@ interface PageProps {
 			<p className="text-gray-500">Yorumlar alınamadı.</p>
 		  )}
 		</div>
-		<CartInfo {...productProps} />
 	  </div>
+	  <CartInfo {...productProps} />
+
+	  </>
 	);
   }
+  
   
