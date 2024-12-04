@@ -57,11 +57,13 @@ export async function middleware(req: NextRequest) {
   if (!token && !refreshToken && req.nextUrl.pathname !== "/") {
     return NextResponse.redirect(new URL("/", req.url));
   }
-
+  if (token && req.nextUrl.pathname === "/") {
+    return NextResponse.redirect(new URL("/products", req.url));
+  }
   return NextResponse.next();
 }
 
 // Sadece korumalı sayfalar için middleware çalıştır
 export const config = {
-  matcher: ["/products/:path*", "/products"],
+  matcher: ["/products/:path*", "/products","/"],
 };
