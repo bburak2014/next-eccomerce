@@ -22,7 +22,7 @@ interface Product {
 
 
   export async function generateMetadata({ params }: {params:{id:string}}): Promise<Metadata> {
-	const { id } = params;
+	const { id } = await params;
 	if (!id) {
 	  throw new Error("ID parametresi eksik.");
 	}
@@ -42,7 +42,7 @@ interface Product {
   }
   
   export default async function ProductDetailPage({ params }: {params:{id:string}}) {
-	const { id } = params;
+	const { id } = await params;
   
 	if (!id) {
 	  throw new Error("ID parametresi eksik.");
