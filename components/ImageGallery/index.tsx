@@ -32,7 +32,7 @@ const Index = (props: Props) => {
 				{data && data.map((image, index) => (
 					<div
 						key={index}
-						className={`cursor-pointer border border-2 ${selectedImage === image ? "border-black opacity-100" : "border-tertiary opacity-30"} snap-center`}
+						className={`cursor-pointer border-2 ${selectedImage === image ? "border-black opacity-100" : "border-tertiary opacity-30"} snap-center`}
 						onClick={() => setSelectedImage(image)}
 					>
 						<ProductImage

@@ -96,7 +96,7 @@ export default function LoginPage() {
 								placeholder="Enter your e-mail address"
 								value={credentials.username}
 								onChange={handleChange}
-								className="w-full px-4 py-3 border rounded-lg bg-inputBg focus:outline-none focus:border-green border-1"
+								className="w-full px-4 py-3 border rounded-lg bg-inputBg focus:outline-none focus:border-green "
 							/>
 						</div>
 						<div className='flex flex-col gap-2  mb-3'>
@@ -108,7 +108,7 @@ export default function LoginPage() {
 								placeholder="Enter you password"
 								value={credentials.password}
 								onChange={handleChange}
-								className="w-full px-4 py-3 border rounded-lg  bg-inputBg focus:outline-none focus:border-green border-1"
+								className="w-full px-4 py-3 border rounded-lg  bg-inputBg focus:outline-none focus:border-green"
 							/>
 						</div>
 						<div className='flex gap-2 items-center  mb-8'>

@@ -16,7 +16,7 @@ const Index: React.FC<Props> = (props) => {
 	const { productData, removeProductData } = useProductData();
 
 	return (
-		<div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 backdrop-blur-md backdrop-filter bg-black bg-opacity-30 transition-all duration-500 ease-in-out">
+		<div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800  backdrop-blur-md backdrop-filter bg-black bg-opacity-30 transition-all duration-500 ease-in-out">
 			<div
 				className="bg-white rounded-lg w-full max-w-lg mx-4 p-6 transform transition-all duration-500 ease-out scale-95 opacity-0 animate-open-modal sm:w-11/12 md:w-2/3"
 			>

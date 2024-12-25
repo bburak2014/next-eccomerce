@@ -18,9 +18,6 @@ interface Product {
 }
 
  
-
-
-
   export async function generateMetadata({ params }: {params:{id:string}}): Promise<Metadata> {
 	const { id } = await params;
 	if (!id) {
